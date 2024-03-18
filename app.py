@@ -15,7 +15,7 @@ class Form(db.model):
     date= db.column(db.Date)
     occupation = db.Column(db.String(80))
 
-    
+
 @app.route("/",methods=["GET","POST"])
 
 def index():
@@ -29,5 +29,9 @@ def index():
 
 
     return render_template("index.html")
+
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
 
 app.run(debug=True, port=5001)
