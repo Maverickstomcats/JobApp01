@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
@@ -28,10 +29,13 @@ def index():
         print("first_name")
 
 
+        form = Form(first_name=first_name, last_name=last_name, email=email, date=date, occupation=occupation)
+        db.session.add(form)
+        db.session.commit()
+
     return render_template("index.html")
 
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-
-app.run(debug=True, port=5001)
+        app.run(debug=True, port=5001)
